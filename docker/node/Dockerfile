@@ -3,4 +3,6 @@ WORKDIR /var/www
 COPY ./www/package*.json ./
 RUN npm install
 COPY ./www ./
-RUN npm run build
+ENTRYPOINT ["bash", "-c"]
+CMD ["npm install && npm run dev"]
+

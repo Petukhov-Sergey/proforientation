@@ -1,14 +1,30 @@
 FROM php:8.1-fpm
+
 RUN apt-get update && apt-get install -y \
-    git \
-    unzip \
-    libzip-dev \
-    && docker-php-ext-install pdo pdo_mysql zip \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+      apt-utils \
+      libpq-dev \
+      libpng-dev \
+      libzip-dev \
+      zip unzip \
+      git && \
+      docker-php-ext-install pdo_mysql && \
+      docker-php-ext-install bcmath && \
+      docker-php-ext-install gd && \
+      docker-php-ext-install zip && \
+      apt-get clean && \
+      rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
+
+COPY ./docker/php/php.ini /usr/local/etc/php/conf.d/php.ini
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
 WORKDIR /var/www
-COPY ./ ./
-RUN composer install --no-dev --optimize-autoloader
-RUN composer dump-autoload --optimize && php artisan optimize
+COPY ../../www ./
+
+ENV COMPOSER_ALLOW_SUPERUSER=1
+RUN composer install --no-interaction \
+    && composer require laravel/ui \
+    && php artisan ui bootstrap \
+    && php artisan ui bootstrap --auth \
+    && composer dump-autoload --optimize \
+    && php artisan optimize
 EXPOSE 9000
