@@ -23,7 +23,6 @@ COPY ../../www ./
 ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN composer install --no-interaction \
     && composer require laravel/ui \
-    && php artisan ui bootstrap \
     && php artisan ui bootstrap --auth \
     && composer dump-autoload --optimize \
     && php artisan optimize
