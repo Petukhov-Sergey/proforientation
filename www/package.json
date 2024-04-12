@@ -1,0 +1,47 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm run development",
+    "development": "mix",
+    "watch": "mix watch",
+    "watch-poll": "npx mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "prod": "npm run production",
+    "production": "mix --production"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "@popperjs/core": "^2.11.6",
+    "axios": "^1.6.4",
+    "babel-loader": "^8.2.3",
+    "bootstrap": "^5.2.3",
+    "laravel-mix": "^6.0.49",
+    "resolve-url-loader": "^5.0.0",
+    "sass": "^1.74.1",
+    "sass-loader": "^12.6.0",
+    "vue": "^3.2.37",
+    "vue-loader": "^16.8.3",
+    "vue-template-compiler": "^2.7.16"
+  },
+  "name": "www",
+  "description": "<p align=\"center\"><a href=\"https://laravel.com\" target=\"_blank\"><img src=\"https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg\" width=\"400\" alt=\"Laravel Logo\"></a></p>",
+  "version": "1.0.0",
+  "main": "webpack.mix.cjs",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Petukhov-Sergey/proforientation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Petukhov-Sergey/proforientation/issues"
+  },
+  "homepage": "https://github.com/Petukhov-Sergey/proforientation#readme"
+}
