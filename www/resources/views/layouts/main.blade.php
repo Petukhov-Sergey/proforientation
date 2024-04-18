@@ -15,13 +15,16 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="{{route('admin.users.index')}}">Main</a>
-{{--                    @can('view', auth()->user())--}}
-{{--                        <a class="nav-item nav-link" href="{{route('admin.user.index')}}">User administration</a>--}}
-{{--                    @endcan--}}
-{{--                    @can('view', auth()->user())--}}
-{{--                        <a class="nav-item nav-link" href="{{route('admin.user.index')}}">Test administration</a>--}}
-{{--                    @endcan--}}
+                    @can('view', auth()->user())
+                        @if(auth()->user()->isAdmin())
+                            <a class="nav-item nav-link" href="{{route('admin.users.index')}}">User administration</a>
+                        @endif
+                    @endcan
+                    @can('view', auth()->user())
+                        @if(auth()->user()->isEditor())
+                        <a class="nav-item nav-link" href="{{route('admin.users.index')}}">Test administration</a>
+                        @endif
+                    @endcan
                 </div>
             </div>
         </nav>

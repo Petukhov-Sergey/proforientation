@@ -4,7 +4,6 @@
         <h1 class="mt-5">Администрирование пользователей</h1>
         <a href="{{ route('admin.user.create') }}" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addUserModal">Добавить
             пользователя</a>
-        <!-- Таблица пользователей -->
         <table class="table">
             <thead>
             <tr>
@@ -22,9 +21,7 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->role_names }}</td>
-                    <!-- Предполагаем, что у пользователя может быть несколько ролей -->
                     <td>
-                        <!-- Пример кнопок действий -->
                         <a href="{{ route('admin.user.edit', $user->id) }}" class="btn btn-sm btn-primary">Редактировать</a>
                         <form action="{{ route('admin.user.destroy', $user->id) }}" method="POST" style="display: inline;">
                             @csrf
