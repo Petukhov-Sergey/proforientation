@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreRequest;
+use App\Http\Requests\User\UpdateRequest;
 use App\Models\Role;
 use App\Models\User;
 use App\Services\UserService;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -17,6 +17,7 @@ class UserController extends Controller
     {
         $this->userService = $userService;
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -32,6 +33,7 @@ class UserController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', User::class);
         $roles = Role::all();
         return view('admin.user.create', compact('roles'));
     }
@@ -41,6 +43,7 @@ class UserController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        $this->authorize('create', User::class);
         $data = $request->validated();
         $this->userService->createUser($data);
         return redirect()->route('admin.users.index');
@@ -51,6 +54,7 @@ class UserController extends Controller
      */
     public function show(User $user) // Laravel автоматически найдет пользователя по ID
     {
+        $this->authorize('view', $user);
         return view('admin.user.show', compact('user'));
     }
 
@@ -59,6 +63,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $this->authorize('update', $user);
         $roles = Role::all();
         return view('admin.user.edit', compact('user', 'roles'));
     }
@@ -68,9 +73,10 @@ class UserController extends Controller
      */
     public function update(UpdateRequest $request, User $user)
     {
+        $this->authorize('update', $user);
         $data = $request->validated();
-        $this->service->update($user, $data);
-        return redirect()->route('admin.user.show', $user->id);
+        $this->userService->updateUser($user, $data);
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -78,6 +84,10 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $this->authorize('delete', $user);
+        $user->roles()->detach();
+        $user->delete();
+        return redirect()->route('admin.users.index');
     }
 }

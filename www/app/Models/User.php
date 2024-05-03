@@ -29,6 +29,14 @@ class User extends Authenticatable
         ];
     }
 
+    public function isAdmin()
+    {
+        return $this->roles->contains('name', 'admin');
+    }
+    public function isEditor()
+    {
+        return $this->roles->contains('name', 'editor');
+    }
     public function getRoleNamesAttribute()
     {
         return $this->roles->pluck('name')->join(', ');
@@ -37,12 +45,6 @@ class User extends Authenticatable
     public function roles() {
         return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
     }
-
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
 
     protected $guarded = false;
 
