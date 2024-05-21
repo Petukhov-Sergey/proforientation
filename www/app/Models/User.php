@@ -21,7 +21,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
 
-    public static function getRoles()
+    public static function getRoles(): array
     {
         return [
             self::ROLE_ADMIN => "Admin",

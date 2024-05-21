@@ -4,7 +4,6 @@ services:
       context: ./docker/nginx
     ports:
       - "80:80"
-      - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
     volumes:
       - ./www:/var/www
     depends_on:
@@ -44,12 +43,5 @@ services:
     command: "npm run dev"
     depends_on:
       - php
-  mailhog:
-    image: mailhog/mailhog
-    ports:
-      - "1025:1025" # SMTP
-      - "8025:8025" # Web interface
-    container_name: project_mailhog
-
 volumes:
   db_data:

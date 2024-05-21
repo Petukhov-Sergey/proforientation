@@ -9,4 +9,6 @@ class RoleUser extends Model
 {
     protected $guarded = false;
     use HasFactory;
+
+
 }

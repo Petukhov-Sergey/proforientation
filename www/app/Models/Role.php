@@ -10,7 +10,8 @@ class Role extends Model
     protected $guarded = false;
     use HasFactory;
 
-    public function users() {
+    public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
         return $this->belongsToMany(User::class, 'role_user', 'role_id', 'user_id');
     }
 
