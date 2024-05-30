@@ -25,5 +25,6 @@ RUN composer install --no-interaction \
     && composer require laravel/ui \
     && php artisan ui bootstrap --auth \
     && composer dump-autoload --optimize \
+    && composer require diglactic/laravel-breadcrumbs \
     && php artisan optimize
 EXPOSE 9000

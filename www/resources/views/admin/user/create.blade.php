@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.app')
 @section('content')
     <div class="container">
         <h1 class="mt-5">Добавление нового пользователя</h1>
@@ -14,11 +14,14 @@
             </div>
             <div class="form-group mb-3">
                 <label for="role_id">Роль</label>
-                <select class="form-control" id="role_id" name="role_id" required>
-                    @foreach ($roles as $role)
-                        <option value="{{ $role->id }}">{{ $role->name }}</option>
-                    @endforeach
-                </select>
+                @foreach ($roles as $role)
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="role_id[]" value="{{ $role->id }}">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            {{ $role->name }}
+                        </label>
+                    </div>
+                @endforeach
             </div>
             <button type="submit" class="btn btn-primary">Создать пользователя</button>
         </form>
